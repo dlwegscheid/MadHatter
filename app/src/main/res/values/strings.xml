@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">David Wegscheid Mad Hatter</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="color">Color</string>
+    <string name="feather">Feather</string>
+
+</resources>
