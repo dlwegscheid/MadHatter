@@ -10,14 +10,50 @@
         android:id="@+id/buttonColor"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/buttonPicture"
+        android:layout_alignEnd="@+id/buttonPicture" />
 
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/feather"
         android:id="@+id/checkFeather"
-        android:layout_alignTop="@+id/buttonColor"
         android:layout_toRightOf="@+id/buttonColor"
-        android:layout_toEndOf="@+id/buttonColor" />
+        android:layout_toEndOf="@+id/buttonColor"
+        android:layout_alignBaseline="@+id/buttonColor" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/picture"
+        android:id="@+id/buttonPicture"
+        android:layout_above="@+id/buttonColor"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinnerHat"
+        android:layout_toEndOf="@+id/buttonColor"
+        android:layout_toRightOf="@+id/buttonColor"
+        android:layout_alignStart="@+id/checkFeather"
+        android:layout_alignLeft="@+id/checkFeather"
+        android:layout_alignBottom="@+id/buttonPicture"
+        android:layout_alignTop="@+id/buttonPicture" />
+
+    <view
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        class="edu.msu.cse.wegschei.davidwegscheidmadhatter.HatterView"
+        android:id="@+id/hatterView"
+        android:layout_above="@+id/buttonPicture"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:focusableInTouchMode="false"
+        android:layout_alignParentTop="true"
+        android:background="@android:color/black" />
 </RelativeLayout>
