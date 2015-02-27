@@ -11,6 +11,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Spinner;
@@ -43,6 +45,8 @@ public class HatterActivity extends ActionBarActivity {
      */
     private static final int SELECT_PICTURE = 1;
 
+    private static final String PARAMETERS = "parameters";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,29 +59,41 @@ public class HatterActivity extends ActionBarActivity {
         colorButton = (Button)findViewById(R.id.buttonColor);
         featherCheck = (CheckBox)findViewById(R.id.checkFeather);
         spinner = (Spinner) findViewById(R.id.spinnerHat);
-    }
 
+        /*
+         * Set up the spinner
+         */
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_hatter, menu);
-        return true;
-    }
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.hats_spinner, android.R.layout.simple_spinner_item);
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        // Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
+
+        spinner.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> arg0, View view, int pos, long id) {
+                hatterView.setHat(pos);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+            }
+        });
+
+        /*
+         * Restore any state
+         */
+        if(savedInstanceState != null) {
+            hatterView.getFromBundle(PARAMETERS, savedInstanceState);
+
+            spinner.setSelection(hatterView.getHat());
         }
-
-        return super.onOptionsItemSelected(item);
     }
 
     /**
@@ -119,9 +135,15 @@ public class HatterActivity extends ActionBarActivity {
 
             if(path != null) {
                 Log.i("Path", path);
-                //hatterView.setImagePath(path);
+                hatterView.setImagePath(path);
             }
-
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        hatterView.putToBundle(PARAMETERS, outState);
     }
 }
