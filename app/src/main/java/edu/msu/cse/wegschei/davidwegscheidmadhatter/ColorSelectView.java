@@ -90,7 +90,6 @@ public class ColorSelectView extends View {
                 touched(event.getX(0), event.getY(0));
                 break;
         }
-        // TODO Auto-generated method stub
         return super.onTouchEvent(event);
     }
 
