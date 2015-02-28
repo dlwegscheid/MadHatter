@@ -1,16 +1,13 @@
 package edu.msu.cse.wegschei.davidwegscheidmadhatter;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.LightingColorFilter;
 import android.graphics.Paint;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -284,14 +281,6 @@ public class HatterView extends View {
     }
 
     /**
-     * Get the installed image path
-     * @return path or null if none
-     */
-    public String getImagePath() {
-        return params.imagePath;
-    }
-
-    /**
      * Set an image path
      * @param imagePath path to image file
      */
@@ -511,14 +500,6 @@ public class HatterView extends View {
         float dx = x2 - x1;
         float dy = y2 - y1;
         return (float) Math.toDegrees(Math.atan2(dy, dx));
-    }
-
-    /**
-     * Get the current custom hat color
-     * @return hat color integer value
-     */
-    public int getColor() {
-        return params.color;
     }
 
     /**
