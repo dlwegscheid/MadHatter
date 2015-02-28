@@ -45,6 +45,11 @@ public class HatterActivity extends ActionBarActivity {
      */
     private static final int SELECT_PICTURE = 1;
 
+    /**
+     * Request code when selecting a color
+     */
+    private static final int SELECT_COLOR = 2;
+
     private static final String PARAMETERS = "parameters";
 
     @Override
@@ -107,6 +112,17 @@ public class HatterActivity extends ActionBarActivity {
         intent.setAction(Intent.ACTION_GET_CONTENT);
 
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_PICTURE);
+    }
+
+    /**
+     * Handle a Color button press
+     * @param view The view this is called from
+     */
+    public void onColor(View view) {
+        // Get a color
+        //Intent intent = new Intent(this, ColorSelectActivity.class);
+
+        //this.startActivityForResult(intent, SELECT_COLOR);
     }
 
     @Override

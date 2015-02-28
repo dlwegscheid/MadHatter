@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/picture"
+        android:id="@+id/buttonPicture"
+        android:layout_gravity="end"
+        android:paddingLeft="70dp"
+        android:paddingRight="70dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="onPicture" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/color"
+        android:id="@+id/buttonColor"
+        android:layout_below="@+id/buttonPicture"
+        android:layout_alignLeft="@+id/buttonPicture"
+        android:layout_alignStart="@+id/buttonPicture"
+        android:layout_alignRight="@+id/buttonPicture"
+        android:layout_alignEnd="@+id/buttonPicture"
+        android:onClick="onColor" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinnerHat"
+        android:layout_below="@+id/buttonColor"
+        android:layout_alignLeft="@+id/buttonColor"
+        android:layout_alignStart="@+id/buttonColor" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/feather"
+        android:id="@+id/checkFeather"
+        android:layout_below="@+id/spinnerHat"
+        android:layout_alignLeft="@+id/spinnerHat"
+        android:layout_alignStart="@+id/spinnerHat"
+        android:layout_alignRight="@+id/spinnerHat"
+        android:layout_alignEnd="@+id/spinnerHat" />
+
+    <view
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        class="edu.msu.cse.wegschei.davidwegscheidmadhatter.HatterView"
+        android:id="@+id/hatterView"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/buttonPicture"
+        android:layout_toStartOf="@+id/buttonPicture"
+        android:background="@android:color/black"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+</RelativeLayout>

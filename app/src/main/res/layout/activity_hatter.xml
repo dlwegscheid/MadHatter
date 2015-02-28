@@ -12,7 +12,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/buttonPicture"
-        android:layout_alignEnd="@+id/buttonPicture" />
+        android:layout_alignEnd="@+id/buttonPicture"
+        android:onClick="onColor" />
 
     <CheckBox
         android:layout_width="wrap_content"

@@ -412,15 +412,6 @@ public class HatterView extends View {
             return;
         }
 
-        if(touch1.id >= 0) {
-            // At least one touch
-            // We are moving
-            touch1.computeDeltas();
-
-            params.hatX += touch1.dX;
-            params.hatY += touch1.dY;
-        }
-
         if(touch2.id >= 0) {
             // Two touches
 
@@ -430,7 +421,32 @@ public class HatterView extends View {
             float angle1 = angle(touch1.lastX, touch1.lastY, touch2.lastX, touch2.lastY);
             float angle2 = angle(touch1.x, touch1.y, touch2.x, touch2.y);
             float da = angle2 - angle1;
-            rotate(da, touch1.x, touch1.y);
+            rotate(da, (touch1.x + touch2.x)/2, (touch1.y + touch2.y)/2);
+
+            /*
+             * Scaling
+             */
+            float distance1 = (float) Math.sqrt(Math.pow(touch1.lastX - touch2.lastX, 2)
+                    + Math.pow(touch1.lastY - touch2.lastY, 2));
+            float distance2 = (float) Math.sqrt(Math.pow(touch1.x - touch2.x, 2)
+                    + Math.pow(touch1.y - touch2.y, 2));
+            float dd = distance2 / distance1;
+            scale(dd, params.hatX + hatBitmap.getWidth()/2*params.hatScale,
+                    params.hatY + hatBitmap.getHeight()/2*params.hatScale);
+
+            touch1.computeDeltas();
+            touch2.computeDeltas();
+
+            params.hatX += (touch1.dX + touch2.dX)/2;
+            params.hatY += (touch1.dY + touch2.dY)/2;
+
+        } else if(touch1.id >= 0) {
+            // At least one touch
+            // We are moving
+            touch1.computeDeltas();
+
+            params.hatX += touch1.dX;
+            params.hatY += touch1.dY;
         }
     }
 
@@ -452,6 +468,16 @@ public class HatterView extends View {
 
         params.hatX = xp;
         params.hatY = yp;
+    }
+
+    public void scale(float dScale, float x1, float y1) {
+        params.hatScale *= dScale;
+
+        float xs = dScale*(params.hatX - x1) + x1;
+        float ys = dScale*(params.hatY - y1) + y1;
+
+        params.hatX = xs;
+        params.hatY = ys;
     }
 
     /**
