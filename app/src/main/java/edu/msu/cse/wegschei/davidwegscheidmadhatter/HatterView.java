@@ -58,6 +58,11 @@ public class HatterView extends View {
          * Custom hat color
          */
         public int color = Color.WHITE;
+
+        /**
+         * Whether or not to draw the feather
+         */
+        public boolean drawFeather = false;
     }
 
     /**
@@ -154,6 +159,11 @@ public class HatterView extends View {
      * don't color the hat band
      */
     private Bitmap hatbandBitmap = null;
+
+    /**
+     * The feather bitmap
+     */
+    private Bitmap featherBitmap = null;
 
     /**
      * Image drawing scale
@@ -255,6 +265,15 @@ public class HatterView extends View {
             canvas.drawBitmap(hatBitmap, 0, 0, customPaint);
         } else {
             canvas.drawBitmap(hatBitmap, 0, 0, null);
+        }
+
+        if(params.drawFeather) {
+            // Android scaled images that it loads. The placement of the
+            // feather is at 322, 22 on the original image when it was
+            // 500 pixels wide. It will have to move based on how big
+            // the hat image actually is.
+            float factor = hatBitmap.getWidth() / 500.0f;
+            canvas.drawBitmap(featherBitmap, 322 * factor, 22 * factor, null);
         }
 
         if(hatbandBitmap != null) {
@@ -535,5 +554,22 @@ public class HatterView extends View {
         setColor(params.color);
         setImagePath(params.imagePath);
         setHat(params.hat);
+        setFeather(params.drawFeather);
     }
+
+    public void setFeather(boolean draw) {
+        if(draw) {
+            params.drawFeather = true;
+            featherBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.feather);
+        } else {
+            params.drawFeather = false;
+            featherBitmap = null;
+        }
+        invalidate();
+    }
+
+    public boolean getDrawFeather() {
+        return params.drawFeather;
+    }
+
 }

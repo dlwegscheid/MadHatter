@@ -1,5 +1,7 @@
 package edu.msu.cse.wegschei.davidwegscheidmadhatter;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -7,6 +9,8 @@ import android.view.MenuItem;
 
 
 public class ColorSelectActivity extends ActionBarActivity {
+
+    public static final String COLOR = "edu.msu.cse.wegschei.davidwegscheidmadhatter.COLOR";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +42,9 @@ public class ColorSelectActivity extends ActionBarActivity {
     }
 
     public void selectColor(int color) {
-
-
+        Intent result = new Intent();
+        result.putExtra(COLOR, color);
+        setResult(Activity.RESULT_OK, result);
+        finish();
     }
 }

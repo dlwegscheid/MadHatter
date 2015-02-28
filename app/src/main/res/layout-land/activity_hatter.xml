@@ -45,7 +45,8 @@
         android:layout_alignLeft="@+id/spinnerHat"
         android:layout_alignStart="@+id/spinnerHat"
         android:layout_alignRight="@+id/spinnerHat"
-        android:layout_alignEnd="@+id/spinnerHat" />
+        android:layout_alignEnd="@+id/spinnerHat"
+        android:onClick="onFeather" />
 
     <view
         android:layout_width="match_parent"

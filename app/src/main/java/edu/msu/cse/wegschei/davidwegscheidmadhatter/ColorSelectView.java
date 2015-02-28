@@ -45,7 +45,6 @@ public class ColorSelectView extends View {
      */
     @Override
     protected void onDraw(Canvas canvas) {
-        // TODO Auto-generated method stub
         super.onDraw(canvas);
 
         if(imageBitmap == null) {

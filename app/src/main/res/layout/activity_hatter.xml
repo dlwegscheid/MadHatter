@@ -22,7 +22,8 @@
         android:id="@+id/checkFeather"
         android:layout_toRightOf="@+id/buttonColor"
         android:layout_toEndOf="@+id/buttonColor"
-        android:layout_alignBaseline="@+id/buttonColor" />
+        android:layout_alignBaseline="@+id/buttonColor"
+        android:onClick="onFeather" />
 
     <Button
         android:layout_width="wrap_content"

@@ -3,6 +3,7 @@ package edu.msu.cse.wegschei.davidwegscheidmadhatter;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
@@ -80,10 +81,10 @@ public class HatterActivity extends ActionBarActivity {
         spinner.setAdapter(adapter);
 
         spinner.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
-
             @Override
             public void onItemSelected(AdapterView<?> arg0, View view, int pos, long id) {
                 hatterView.setHat(pos);
+                updateUI();
             }
 
             @Override
@@ -97,7 +98,7 @@ public class HatterActivity extends ActionBarActivity {
         if(savedInstanceState != null) {
             hatterView.getFromBundle(PARAMETERS, savedInstanceState);
 
-            spinner.setSelection(hatterView.getHat());
+            updateUI();
         }
     }
 
@@ -120,9 +121,14 @@ public class HatterActivity extends ActionBarActivity {
      */
     public void onColor(View view) {
         // Get a color
-        //Intent intent = new Intent(this, ColorSelectActivity.class);
+        Intent intent = new Intent(this, ColorSelectActivity.class);
 
-        //this.startActivityForResult(intent, SELECT_COLOR);
+        this.startActivityForResult(intent, SELECT_COLOR);
+    }
+
+    public void onFeather(View view) {
+        hatterView.setFeather(featherCheck.isChecked());
+        updateUI();
     }
 
     @Override
@@ -153,6 +159,9 @@ public class HatterActivity extends ActionBarActivity {
                 Log.i("Path", path);
                 hatterView.setImagePath(path);
             }
+        } else if(requestCode == SELECT_COLOR && resultCode == Activity.RESULT_OK) {
+            int color = data.getIntExtra(ColorSelectActivity.COLOR, Color.BLACK);
+            hatterView.setColor(color);
         }
     }
 
@@ -162,4 +171,17 @@ public class HatterActivity extends ActionBarActivity {
 
         hatterView.putToBundle(PARAMETERS, outState);
     }
+
+    /**
+     * Ensure the user interface components match the current state
+     */
+    private void updateUI() {
+        int num = hatterView.getHat();
+
+        spinner.setSelection(num);
+        featherCheck.setChecked(hatterView.getDrawFeather());
+
+        colorButton.setEnabled(num == HatterView.HAT_CUSTOM);
+    }
+
 }
